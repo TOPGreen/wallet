@@ -1,0 +1,26 @@
+<form [formGroup]="form" (submit)="onSubmit()">
+  <div class="row">
+    <div class="col">
+      <div class="input-group mb-2">
+        <input [formControlName]="'title'" type="text" class="form-control"
+               [class.is-invalid]="form.get('title').invalid && form.get('title').dirty" placeholder="Название" aria-label="Название">
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <div class="input-group mb-2">
+        <input [formControlName]="'price'" type="text" class="form-control" placeholder="Стоимость" aria-label="Стоимость">
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <div class="input-group mb-2 justify-content-center">
+        <button [disabled]="form.invalid" type="submit" class="btn btn-sm btn-outline-secondary">Добавить расходы</button>
+      </div>
+    </div>
+  </div>
+</form>

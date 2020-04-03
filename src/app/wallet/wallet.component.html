@@ -10,54 +10,21 @@
       Ваши расходы за неделю
     </div>
     <div class="col col-2">
-      <button type="button" class="btn btn-outline-primary">+</button>
+      <button type="button"
+              class="btn"
+              [class.btn-outline-primary]="!isAddPurchaseVisible"
+              [class.btn-outline-danger]="isAddPurchaseVisible"
+              (click)="onClick()">{{ isAddPurchaseVisible ? '-' : '+' }}</button>
     </div>
   </div>
 
-  <div class="row">
-    <div class="col">
-      <div class="input-group mb-2">
-        <input type="text" class="form-control" placeholder="Название" aria-label="Название">
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col">
-      <div class="input-group mb-2">
-        <input type="text" class="form-control" placeholder="Стоимость" aria-label="Стоимость">
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col">
-      <div class="input-group mb-2 justify-content-center">
-        <button type="button" class="btn btn-sm btn-outline-secondary">Добавить расходы</button>
-      </div>
-    </div>
-  </div>
+  <app-purchase-add *ngIf="isAddPurchaseVisible" (add)="onAdd($event)"></app-purchase-add>
 
   <div class="row">
     <div class="col">
       <ul class="list-group list-group-flush">
-        <li class="list-group-item">
-          <div class="d-flex justify-content-between align-items-center p-2 purchase">
-            Проезд на метро
-            <span class="badge badge-secondary">40</span>
-          </div>
-        </li>
-        <li class="list-group-item">
-          <div class="d-flex justify-content-between align-items-center p-2 purchase">
-            Iphone XXL
-            <span class="badge badge-secondary">100500</span>
-          </div>
-        </li>
-        <li class="list-group-item">
-          <div class="d-flex justify-content-between align-items-center p-2 purchase">
-            Доширак (острый)
-            <span class="badge badge-secondary">123</span>
-          </div>
+        <li *ngFor="let purchase of purchases" class="list-group-item">
+          <app-purchase-preview [purchase]="purchase"></app-purchase-preview>
         </li>
       </ul>
     </div>
@@ -67,7 +34,7 @@
     <div class="col">
       <span class="summary-label">Итого:&nbsp;</span>
       <span class="summary-value">
-        <strong>100663</strong>💰
+        <strong>{{summary}}</strong>💰
       </span>
     </div>
   </div>
