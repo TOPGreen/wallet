@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "angular-lect1"
+    }
+  },
+  "defaultProject": "angular-lect1",
+  "cli": {
+    "analytics": false
+  }
 }

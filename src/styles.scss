@@ -1,1 +1,8 @@
-/* You can add global styles to this file, and also import other style files */
+$container-max-widths: (
+  sm: 200px,
+  md: 300px,
+  lg: 400px
+);
+
+@import "../node_modules/bootstrap/scss/bootstrap";
+
