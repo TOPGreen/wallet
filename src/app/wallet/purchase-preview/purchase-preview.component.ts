@@ -16,15 +16,22 @@ export class PurchasePreviewComponent implements OnInit {
   @Output()
   clicked = new EventEmitter<void>();
 
+  @Output()
+  deleted = new EventEmitter<void>();
+
   constructor() {
   }
 
   ngOnInit(): void {
   }
 
-  onClick(event: MouseEvent) {
-    event.stopPropagation();
+  onClick() {
     this.clicked.emit();
+  }
+
+  onDelete(event: MouseEvent) {
+    event.stopPropagation();
+    this.deleted.emit();
   }
 
 }
