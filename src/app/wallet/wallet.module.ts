@@ -6,6 +6,7 @@ import {PurchaseAddModule} from './purchase-add/purchase-add.module';
 import {PurchasesService} from './purchases.service';
 import {IPurchasesApiServiceToken} from '../../shared/interfaces/IPurchasesApiService';
 import {PurchasesApiMockService} from '../../shared/services/purchasesApiMock.service';
+import {PurchasesApiService} from '../../shared/services/purchasesApi.service';
 
 @NgModule({
     declarations: [WalletComponent],
@@ -19,7 +20,8 @@ import {PurchasesApiMockService} from '../../shared/services/purchasesApiMock.se
   ],
   providers: [
     PurchasesService,
-    {provide: IPurchasesApiServiceToken, useClass: PurchasesApiMockService}
+    // {provide: IPurchasesApiServiceToken, useClass: PurchasesApiMockService},
+    {provide: IPurchasesApiServiceToken, useClass: PurchasesApiService}
   ]
 })
 export class WalletModule { }

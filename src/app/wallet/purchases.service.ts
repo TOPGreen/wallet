@@ -33,12 +33,17 @@ export class PurchasesService {
   }
 
   addPurchase(purchase: Purchase) {
-    this.purchases.push(purchase);
-    this.updateSum();
+    this.purchaseApiService.add(purchase).subscribe(() => {
+      this.initialize();
+    });
   }
 
   deletePurchase(index: number) {
-    this.purchases.splice(index, 1);
+    const id = this.purchases[index].id;
+
+    this.purchaseApiService.delete(id).subscribe(() => {
+      this.initialize();
+    });
   }
 
   private updateSum() {

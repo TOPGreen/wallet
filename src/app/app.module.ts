@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import {WalletModule} from './wallet/wallet.module';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -10,9 +11,9 @@ import {WalletModule} from './wallet/wallet.module';
   ],
   imports: [
     BrowserModule,
-    WalletModule
+    WalletModule,
+    HttpClientModule
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
