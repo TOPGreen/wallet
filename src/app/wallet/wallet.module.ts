@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { WalletComponent } from './wallet.component';
 import {PurchasePreviewModule} from './purchase-preview/purchase-preview.module';
 import {PurchaseAddModule} from './purchase-add/purchase-add.module';
+import {PurchasesService} from './purchases.service';
 
 @NgModule({
     declarations: [WalletComponent],
@@ -13,6 +14,9 @@ import {PurchaseAddModule} from './purchase-add/purchase-add.module';
     CommonModule,
     PurchasePreviewModule,
     PurchaseAddModule
+  ],
+  providers: [
+    PurchasesService
   ]
 })
 export class WalletModule { }

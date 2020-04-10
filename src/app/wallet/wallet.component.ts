@@ -1,11 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-
-export interface Purchase {
-  title: string;
-  price: number;
-  date: Date;
-  comment: string;
-}
+import {Component, OnInit} from '@angular/core';
+import {Purchase} from '../../shared/interfaces/Purchase';
+import {PurchasesService} from './purchases.service';
 
 const data: Purchase[] = [
   {
@@ -40,16 +35,22 @@ const data: Purchase[] = [
   styleUrls: ['./wallet.component.scss']
 })
 export class WalletComponent implements OnInit {
-  purchases: Purchase[] = [];
   isAddPurchaseVisible = false;
-  summary = 0;
   currentIndex = -1;
 
-  constructor() { }
+  constructor(private purchasesService: PurchasesService) {
+  }
+
+  get purchases(): Purchase[] {
+    return this.purchasesService.walletPurchases;
+  }
+
+  get summary(): number {
+    return this.purchasesService.walletSummary;
+  }
 
   ngOnInit(): void {
-    this.purchases = data;
-    this.updateSum();
+    this.purchasesService.setPurchases(data);
   }
 
   onClick() {
@@ -57,9 +58,8 @@ export class WalletComponent implements OnInit {
   }
 
   onAdd(purchase: Purchase) {
-    this.purchases.push(purchase);
+    this.purchasesService.addPurchase(purchase);
     this.onClick();
-    this.updateSum();
   }
 
   onPurchaseClick(index: number) {
@@ -67,9 +67,4 @@ export class WalletComponent implements OnInit {
       ? -1
       : index;
   }
-
-  private updateSum() {
-    this.summary = this.purchases.reduce((sum, p) => Number(p.price) + sum, 0);
-  }
-
 }
