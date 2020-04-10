@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Purchase} from '../wallet.component';
 
 @Component({
@@ -10,10 +10,21 @@ export class PurchasePreviewComponent implements OnInit {
   @Input()
   purchase: Purchase;
 
+  @Input()
+  isDateVisible = false;
+
+  @Output()
+  clicked = new EventEmitter<void>();
+
   constructor() {
   }
 
   ngOnInit(): void {
+  }
+
+  onClick(event: MouseEvent) {
+    event.stopPropagation();
+    this.clicked.emit();
   }
 
 }

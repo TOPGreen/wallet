@@ -3,24 +3,34 @@ import { Component, OnInit } from '@angular/core';
 export interface Purchase {
   title: string;
   price: number;
+  date: Date;
+  comment: string;
 }
 
 const data: Purchase[] = [
   {
     title: 'Проезд на метро',
-    price: 40
+    price: 40,
+    date: new Date(),
+    comment: ''
   },
   {
     title: 'Iphone XXL',
-    price: 100500
+    price: 100500,
+    date: new Date(),
+    comment: ''
   },
   {
     title: 'Доширак (острый)',
-    price: 123
+    price: 123,
+    date: new Date(),
+    comment: ''
   },
   {
     title: 'Доширак',
-    price: 100
+    price: 100,
+    date: new Date(),
+    comment: ''
   }
 ];
 
@@ -33,6 +43,7 @@ export class WalletComponent implements OnInit {
   purchases: Purchase[] = [];
   isAddPurchaseVisible = false;
   summary = 0;
+  currentIndex = -1;
 
   constructor() { }
 
@@ -49,6 +60,12 @@ export class WalletComponent implements OnInit {
     this.purchases.push(purchase);
     this.onClick();
     this.updateSum();
+  }
+
+  onPurchaseClick(index: number) {
+    this.currentIndex = this.currentIndex === index
+      ? -1
+      : index;
   }
 
   private updateSum() {

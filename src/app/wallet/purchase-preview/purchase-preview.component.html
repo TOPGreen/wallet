@@ -1,4 +1,9 @@
-<div class="d-flex justify-content-between align-items-center p-2 purchase">
+<div class="d-flex justify-content-between align-items-center p-2 purchase" (click)="onClick($event)">
   {{ purchase.title }}
   <span class="badge badge-secondary">{{ purchase.price }}</span>
+</div>
+
+<div *ngIf="isDateVisible" class="d-flex justify-content-between align-items-center p-2">
+  Дата
+  <span>{{ purchase.date | date: 'longDate' }}</span>
 </div>
