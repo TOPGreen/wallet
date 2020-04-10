@@ -11,7 +11,29 @@
   <div class="row">
     <div class="col">
       <div class="input-group mb-2">
-        <input [formControlName]="'price'" type="text" class="form-control" placeholder="Стоимость" aria-label="Стоимость">
+        <input [formControl]="priceControl"
+               [class.is-invalid]="priceControl.invalid && priceControl.dirty"
+               type="text" class="form-control" placeholder="Стоимость" aria-label="Стоимость">
+        <div class="invalid-feedback">
+          {{ getError(priceControlName) }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <div class="input-group mb-2">
+        <input formControlName="date"
+               type="date" class="form-control" placeholder="Дата" aria-label="Дата">
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <div class="input-group mb-2">
+        <textarea formControlName="comment" class="form-control" placeholder="Комментарий" aria-label="Комментарий"></textarea>
       </div>
     </div>
   </div>
