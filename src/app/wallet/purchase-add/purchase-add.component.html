@@ -41,7 +41,8 @@
   <div class="row">
     <div class="col">
       <div class="input-group mb-2 justify-content-center">
-        <button [disabled]="form.invalid" type="submit" class="btn btn-sm btn-outline-secondary">Добавить расходы</button>
+        <button *ngIf="!currentPurchase" [disabled]="form.invalid" type="submit" class="btn btn-sm btn-outline-secondary">Добавить расходы</button>
+        <button *ngIf="currentPurchase" [disabled]="form.invalid" type="submit" class="btn btn-sm btn-outline-secondary">Изменить расходы</button>
       </div>
     </div>
   </div>

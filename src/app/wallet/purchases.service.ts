@@ -34,7 +34,8 @@ export class PurchasesService {
 
   addPurchase(purchase: Purchase) {
     this.purchaseApiService.add(purchase).subscribe(() => {
-      this.initialize();
+      this.purchases.push(purchase);
+      this.updateSum();
     });
   }
 
@@ -42,7 +43,17 @@ export class PurchasesService {
     const id = this.purchases[index].id;
 
     this.purchaseApiService.delete(id).subscribe(() => {
-      this.initialize();
+      this.purchases.splice(index, 1);
+      this.updateSum();
+    });
+  }
+
+  editPurchase(index: number, purchase: Purchase) {
+    const id = this.purchases[index].id;
+
+    this.purchaseApiService.editByid(id, purchase).subscribe(() => {
+      this.purchases[index] = purchase;
+      this.updateSum();
     });
   }
 

@@ -18,7 +18,10 @@
     </div>
   </div>
 
-  <app-purchase-add *ngIf="isAddPurchaseVisible" (add)="onAdd($event)"></app-purchase-add>
+  <app-purchase-add *ngIf="isAddPurchaseVisible"
+                    (add)="onAdd($event)"
+                    (edit)="onEdit($event)"
+                    [currentPurchase]="currentPurchase"></app-purchase-add>
 
   <div class="row">
     <div class="col">
@@ -28,7 +31,8 @@
             [isDateVisible]="index === currentIndex"
             [purchase]="purchase"
             (deleted)="onPurchaseDelete(index)"
-            (clicked)="onPurchaseClick(index)"></app-purchase-preview>
+            (clicked)="onPurchaseClick(index)"
+            (editClicked)="onPurchaseEdit(index, purchase)"></app-purchase-preview>
         </li>
       </ul>
     </div>

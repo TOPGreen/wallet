@@ -19,6 +19,9 @@ export class PurchasePreviewComponent implements OnInit {
   @Output()
   deleted = new EventEmitter<void>();
 
+  @Output()
+  editClicked = new EventEmitter<void>();
+
   constructor() {
   }
 
@@ -32,6 +35,11 @@ export class PurchasePreviewComponent implements OnInit {
   onDelete(event: MouseEvent) {
     event.stopPropagation();
     this.deleted.emit();
+  }
+
+  onEditClicked(event: MouseEvent){
+    event.stopPropagation();
+    this.editClicked.emit();
   }
 
 }

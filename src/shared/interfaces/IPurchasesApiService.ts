@@ -10,4 +10,6 @@ export interface IPurchasesApiService {
   add(entity: Purchase): Observable<void>;
 
   delete(id: number): Observable<void>;
+
+  editByid(id: number, entity: Purchase): Observable<void>;
 }
