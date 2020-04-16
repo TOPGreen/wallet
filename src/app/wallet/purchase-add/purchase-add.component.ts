@@ -66,7 +66,11 @@ export class PurchaseAddComponent implements OnInit, OnChanges {
     result.date = result.date ? result.date : new Date(Date.now());
 
     if (this.currentPurchase) {
-      this.edit.emit(Object.assign({id: this.currentPurchase.id}, result));
+      // this.currentPurchase.title = result.title;
+      // this.currentPurchase.price = result.price;
+      // this.currentPurchase.date = result.title;
+      // this.currentPurchase.comment = result.comment;
+      this.edit.emit(Object.assign(this.currentPurchase, result), );
       return;
     }
     this.add.emit(result);

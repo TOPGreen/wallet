@@ -29,19 +29,19 @@ export class PurchasesService {
 
   setPurchases(purchases: Purchase[]) {
     this.purchases = purchases;
+    console.log(this.purchases);
     this.updateSum();
   }
 
   addPurchase(purchase: Purchase) {
     this.purchaseApiService.add(purchase).subscribe(() => {
-      this.purchases.push(purchase);
+      this.initialize();
       this.updateSum();
     });
   }
 
   deletePurchase(index: number) {
     const id = this.purchases[index].id;
-
     this.purchaseApiService.delete(id).subscribe(() => {
       this.purchases.splice(index, 1);
       this.updateSum();
@@ -49,9 +49,8 @@ export class PurchasesService {
   }
 
   editPurchase(index: number, purchase: Purchase) {
-    const id = this.purchases[index].id;
-
-    this.purchaseApiService.editByid(id, purchase).subscribe(() => {
+    console.log(purchase);
+    this.purchaseApiService.edit(purchase).subscribe(() => {
       this.purchases[index] = purchase;
       this.updateSum();
     });

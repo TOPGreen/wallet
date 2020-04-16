@@ -23,7 +23,7 @@ export class PurchasesApiService implements IPurchasesApiService {
     return this.httpClient.get<Purchase[]>(`${host}`);
   }
 
-  editByid(id: number, entity: Purchase): Observable<void> {
-    return this.httpClient.put<void>(`${host}/${id}`, entity);
+  edit(entity: Purchase): Observable<void> {
+    return this.httpClient.put<void>(`${host}`, entity);
   }
 }

@@ -38,7 +38,7 @@ export class WalletComponent implements OnInit {
   }
 
   onEdit(purchase: Purchase) {
-    this.purchasesService.editPurchase(purchase.id, purchase);
+    this.purchasesService.editPurchase(this.currentIndex, purchase);
   }
 
 
@@ -54,7 +54,6 @@ export class WalletComponent implements OnInit {
 
   onPurchaseEdit(index: number, purchase: Purchase) {
     this.isAddPurchaseVisible = true;
-    purchase.id = index;
     this.currentPurchase = purchase;
   }
 }
