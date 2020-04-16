@@ -45,4 +45,8 @@ export class PurchasesApiMockService implements IPurchasesApiService {
       }
     ]);
   }
+
+  edit(entity: Purchase): Observable<void> {
+    return undefined;
+  }
 }

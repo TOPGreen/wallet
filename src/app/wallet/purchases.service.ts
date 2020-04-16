@@ -29,20 +29,30 @@ export class PurchasesService {
 
   setPurchases(purchases: Purchase[]) {
     this.purchases = purchases;
+    console.log(this.purchases);
     this.updateSum();
   }
 
   addPurchase(purchase: Purchase) {
     this.purchaseApiService.add(purchase).subscribe(() => {
       this.initialize();
+      this.updateSum();
     });
   }
 
   deletePurchase(index: number) {
     const id = this.purchases[index].id;
-
     this.purchaseApiService.delete(id).subscribe(() => {
-      this.initialize();
+      this.purchases.splice(index, 1);
+      this.updateSum();
+    });
+  }
+
+  editPurchase(index: number, purchase: Purchase) {
+    console.log(purchase);
+    this.purchaseApiService.edit(purchase).subscribe(() => {
+      this.purchases[index] = purchase;
+      this.updateSum();
     });
   }
 

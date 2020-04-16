@@ -3,6 +3,6 @@ $container-max-widths: (
   md: 300px,
   lg: 400px
 );
-
-@import "../node_modules/bootstrap/scss/bootstrap";
+@import "~bootstrap/dist/css/bootstrap.css"
+//@import "../node_modules/bootstrap/scss/bootstrap";
 

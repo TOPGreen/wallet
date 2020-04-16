@@ -7,6 +7,8 @@ import {PurchasesService} from './purchases.service';
 import {IPurchasesApiServiceToken} from '../../shared/interfaces/IPurchasesApiService';
 import {PurchasesApiMockService} from '../../shared/services/purchasesApiMock.service';
 import {PurchasesApiService} from '../../shared/services/purchasesApi.service';
+import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import {UrlHttpInterceptor} from '../../shared/interceptors/url-http-interceptor';
 
 @NgModule({
     declarations: [WalletComponent],
@@ -21,7 +23,12 @@ import {PurchasesApiService} from '../../shared/services/purchasesApi.service';
   providers: [
     PurchasesService,
     // {provide: IPurchasesApiServiceToken, useClass: PurchasesApiMockService},
-    {provide: IPurchasesApiServiceToken, useClass: PurchasesApiService}
+    {provide: IPurchasesApiServiceToken, useClass: PurchasesApiService},
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: UrlHttpInterceptor,
+      multi: true
+    }
   ]
 })
 export class WalletModule { }

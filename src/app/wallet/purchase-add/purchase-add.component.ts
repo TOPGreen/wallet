@@ -1,17 +1,27 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Purchase} from '../../../shared/interfaces/Purchase';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-purchase-add',
   templateUrl: './purchase-add.component.html',
   styleUrls: ['./purchase-add.component.scss']
 })
-export class PurchaseAddComponent implements OnInit {
+export class PurchaseAddComponent implements OnInit, OnChanges {
   readonly priceControlName = 'price';
 
   @Output()
   add = new EventEmitter<Purchase>();
+
+  @Output()
+  edit = new EventEmitter<Purchase>();
+
+  @Input()
+  editIndex: number;
+
+  @Input()
+  currentPurchase: Purchase;
 
   // FormBuilder
   form = new FormGroup({
@@ -23,7 +33,7 @@ export class PurchaseAddComponent implements OnInit {
     comment: new FormControl('')
   });
 
-  constructor() {
+  constructor(private datePipe: DatePipe) {
   }
 
   get priceControl(): FormControl {
@@ -33,12 +43,37 @@ export class PurchaseAddComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  ngOnChanges(): void {
+    if (this.currentPurchase) {
+      const date = this.currentPurchase.date ? this.currentPurchase.date : new Date(Date.now());
+
+      this.form.patchValue(
+        {
+          title: this.currentPurchase.title,
+          price: this.currentPurchase.price,
+          date: this.datePipe.transform(date, 'yyyy-MM-dd'),
+          comment: this.currentPurchase.comment
+        }
+      );
+    }
+  }
+
   onSubmit() {
     if (this.form.invalid) {
       return;
     }
+    const result = this.form.value;
+    result.date = result.date ? result.date : new Date(Date.now());
 
-    this.add.emit(this.form.value);
+    if (this.currentPurchase) {
+      // this.currentPurchase.title = result.title;
+      // this.currentPurchase.price = result.price;
+      // this.currentPurchase.date = result.title;
+      // this.currentPurchase.comment = result.comment;
+      this.edit.emit(Object.assign(this.currentPurchase, result), );
+      return;
+    }
+    this.add.emit(result);
   }
 
   getError(controlName: string): string {

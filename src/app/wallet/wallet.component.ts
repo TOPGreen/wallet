@@ -10,6 +10,7 @@ import {PurchasesService} from './purchases.service';
 export class WalletComponent implements OnInit {
   isAddPurchaseVisible = false;
   currentIndex = -1;
+  currentPurchase = null;
 
   constructor(private purchasesService: PurchasesService) {
   }
@@ -28,12 +29,18 @@ export class WalletComponent implements OnInit {
 
   onClick() {
     this.isAddPurchaseVisible = !this.isAddPurchaseVisible;
+    this.currentPurchase = null;
   }
 
   onAdd(purchase: Purchase) {
     this.purchasesService.addPurchase(purchase);
     this.onClick();
   }
+
+  onEdit(purchase: Purchase) {
+    this.purchasesService.editPurchase(this.currentIndex, purchase);
+  }
+
 
   onPurchaseClick(index: number) {
     this.currentIndex = this.currentIndex === index
@@ -43,5 +50,10 @@ export class WalletComponent implements OnInit {
 
   onPurchaseDelete(index: number) {
     this.purchasesService.deletePurchase(index);
+  }
+
+  onPurchaseEdit(index: number, purchase: Purchase) {
+    this.isAddPurchaseVisible = true;
+    this.currentPurchase = purchase;
   }
 }
